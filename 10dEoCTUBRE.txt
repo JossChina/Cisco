@@ -1,0 +1,253 @@
+Switch>enable
+Switch#show runn
+
+Switch#show running-config
+
+Switch#configure terminal
+
+Switch(config)#hostname EdificioA
+EdificioA(config)#enable secret cisco
+EdificioA(config)#end
+--------------------------------------------------------
+EdificioA#
+%SYS-5-CONFIG_I: Configured from console by console
+EdificioA#show running-config
+
+EdificioA#show startup-config
+startup-config is not present
+-----------------------------------------------------
+EdificioA#copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+
+EdificioA#show startup-config
+-----------------------------------------------------
+EdificioA#configure terminal
+-----------------------------------------------------
+EdificioA(config)#hostname Sistemas
+Sistemas(config)#end
+Sistemas#
+%SYS-5-CONFIG_I: Configured from console by console
+Sistemas#show running-config
+
+Sistemas#show startup-config
+-----------------------------------------------------
+Sistemas#copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK] 
+
+Sistemas#show startup-config
+-----------------------------------------------------
+EdificioA#show vlan brief
+EdificioA(config)#vlan 20 
+EdificioA(config-vlan)#name estudiantes
+EdificioA(config-vlan)#vlan 30
+EdificioA(config-vlan)#name maestros
+----------------------------------------------------
+EdificioA#show vlan brief
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/1, Fa0/2, Fa0/3, Fa0/4
+                                                Fa0/5, Fa0/6, Fa0/7, Fa0/8
+                                                Fa0/9, Fa0/10, Fa0/11, Fa0/12
+                                                Fa0/13, Fa0/14, Fa0/15, Fa0/16
+                                                Fa0/17, Fa0/18, Fa0/19, Fa0/20
+                                                Fa0/21, Fa0/22, Fa0/23, Fa0/24
+                                                Gig1/1, Gig1/2
+20   estudiantes                      active    
+30   maestros                         active    
+1002 fddi-default                     active    
+1003 token-ring-default               active    
+1004 fddinet-default                  active    
+1005 trnet-default                    active    
+EdificioA#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+------------------------------------------------------------------
+EdificioA(config)#interface fastethernet 0/2
+EdificioA(config-if)#switchport mode access
+EdificioA(config-if)#switchport access vlan 20
+EdificioA(config-if)#interface fastethernet 0/3
+EdificioA(config-if)#switchport mode access
+EdificioA(config-if)#switchport access vlan 20
+EdificioA(config-if)#interface fastethernet 0/11
+EdificioA(config-if)#switchport mode access
+EdificioA(config-if)#switchport access vlan 30
+EdificioA(config-if)#interface fastethernet 0/12
+EdificioA(config-if)#switchport mode access
+EdificioA(config-if)#switchport access vlan 30
+------------------------------------------------------------------
+EdificioA>enable
+EdificioA#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+EdificioA(config)#interface range fastethernet 0/4-10
+EdificioA(config-if-range)#switchport mode access
+EdificioA(config-if-range)#switchport access vlan 20
+EdificioA(config-if-range)#interface range fastethernet 0/13-22
+EdificioA(config-if-range)#switchport mode access
+EdificioA(config-if-range)#switchport access vlan 30
+EdificioA(config-if-range)#end
+-------------------------------------------------------------
+EdificioA#conf ter
+Enter configuration commands, one per line.  End with CNTL/Z.
+EdificioA(config)#vlan 50
+EdificioA(config-vlan)#name mercadotecnia
+EdificioA(config-vlan)#interface fastethernet 0/23
+EdificioA(config-if)#switchport mode access
+EdificioA(config-if)#switchport access vlan 50
+EdificioA(config-if)#end
+
+EdificioA#conf ter
+Enter configuration commands, one per line.  End with CNTL/Z.
+------------------------------------------------------------
+---NO SE HACE--- PUTO EL QUE LO HAGA 
+EdificioA(config)#no vlan 50
+EdificioA(config)#end
+-----------------------------------------------------------
+regresar 
+1
+EdificioA#conf ter
+Enter configuration commands, one per line.  End with CNTL/Z.
+EdificioA(config)#interface fastethernet 0/23
+EdificioA(config-if)#no switchport access vlan
+2
+EdificioA(config)#interface fastethernet 0/23
+EdificioA(config-if)#switchport access vlan 1
+------------------------------------------------------------
+modo troncal
+EdificioA(config)#interface fastethernet 0/24
+EdificioA(config-if)#switchport mode trunk
+----------------------------------------------------
+
+
+
+
+nueva
+
+Switch>en
+Switch#conf ter
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#hostname switch1
+switch1(config)#enable secret switch1
+switch1(config)#no ip domain-lookup
+switch1(config)#copy running-config startup-config
+                 ^
+% Invalid input detected at '^' marker.
+	
+switch1(config)#end
+switch1#
+%SYS-5-CONFIG_I: Configured from console by console
+switch1#copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+switch1#
+
+
+
+Enter configuration commands, one per line.  End with CNTL/Z.
+switch2(config)#interface fastethernet 0/7
+switch2(config-if)#switchport mode access
+switch2(config-if)#no shutdown
+switch2(config-if)#interface fastethernet 0/13
+switch2(config-if)#switchport mode access
+switch2(config-if)#no shutdown
+switch2(config-if)#interface fastethernet 0/19
+switch2(config-if)#switchport mode access
+switch2(config-if)#no shutdown
+
+
+switch1>en
+Password: 
+switch1#show vtp status
+
+switch1#conf ter
+Enter configuration commands, one per line.  End with CNTL/Z.
+switch1(config)#vtp mode server
+Device mode already VTP SERVER.
+switch1(config)#vtp domain informatica
+Changing VTP domain name from NULL to informatica
+switch1(config)#vtp password itcg
+Setting device VLAN database password to itcg
+--------------------------------------------------------
+
+17/10/2023
+
+switch1(config)#interface fastethernet 0/1
+switch1(config-if)#switchport mode trunk
+switch1(config-if)#switchport trunk native vlan 50
+switch1(config-if)#no shutdown
+switch1(config-if)#interface fastethernet 0/2
+switch1(config-if)#switchport mode trunk
+switch1(config-if)#switchport trunk native vlan 50
+switch1(config-if)#no shutdown
+
+
+
+
+switch2(config)#interface fastethernet 0/7
+switch2(config-if)#switchport port-security
+switch2(config-if)#switchport port-security maximum 1
+switch2(config-if)#switchport port-security mac-address sticky
+switch2(config-if)#interface fastethernet 0/13
+switch2(config-if)#switchport port-security
+switch2(config-if)#switchport port-security maximum 1
+switch2(config-if)#switchport port-security mac-address sticky
+switch2(config-if)#interface fastethernet 0/19
+switch2(config-if)#switchport port-security
+switch2(config-if)#switchport port-security maximum 1
+switch2(config-if)#switchport port-security mac-address sticky
+
+
+
+switch1(config)#vlan 5
+switch1(config-vlan)#name invitados 
+switch1(config-vlan)#vlan 10
+switch1(config-vlan)#name maestros
+switch1(config-vlan)#vlan 15
+switch1(config-vlan)#name estudiantes
+switch1(config-vlan)#end
+
+switch1(config-if)#interface vlan 50
+switch1(config-if)#ip address 192.168.50.2 255.255.255.0
+switch1(config-if)#no shutdown
+
+
+
+
+
+switch1(config)#interface range fastethernet 0/7-12
+switch1(config-if-range)#switchport access vlan 5
+switch1(config-if-range)#interface range fastethernet 0/13-18
+switch1(config-if-range)#switchport access vlan 10
+switch1(config-if-range)#interface range fastethernet 0/19-24
+switch1(config-if-range)#switchport access vlan 15
+switch1(config-if-range)#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
